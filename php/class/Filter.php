@@ -1,6 +1,7 @@
 
 <?php
 include "db.php";
+include "ImgUpload.php";
 
 class Filter
 {
@@ -20,7 +21,7 @@ class Filter
     private $_wiek;
     private $_opis;
     private $_zdjecie;
-    private $_koszta_miesiac;
+    private $_koszta;
 
 
     public function setID($id) {
@@ -81,9 +82,9 @@ class Filter
         $this->_zdjecie = $zdjecie;
     }
 
-    public function setKoszta($koszta_miesiac)
+    public function setKoszta($koszta)
     {
-        $this->_koszta_miesiac = $koszta_miesiac;
+        $this->_koszta = $koszta;
     }
 
 //obiekt do łaczenia z bazą danych
