@@ -1,5 +1,5 @@
 <?php
-//include "db.php";
+//include "DBConnection.php";
 //include "ImgUpload.php";
 class Animal
 {
@@ -63,6 +63,11 @@ class Animal
         $this->db = $this->db->returnConnection();
     }
 
+    public function updateStatusWhenAnimalAdopted(){
+        $query = 'UPDATE zwierzeta SET status = "w domu" WHERE id ="'.$this->_id .'"';
+        $result = $this->db->query($query) or die($this->db->error);
+        return true;
+    }
     public function getAnimalInfo(){
         $query = "SELECT * FROM zwierzeta WHERE id = '".$this->_id."'";
         $result = $this->db->query($query) or die($this->db->error);
@@ -103,5 +108,23 @@ class Animal
         return true;
         }
 
+    // Edit Animal Method
+    public function editAnimal()
+    {
+        $query = 'UPDATE zwierzeta SET 
+            imie="' . $this->_imie . '",
+            gatunek="' . $this->_gatunek . '",
+            rasa="' . $this->_rasa . '",
+            plec="' . $this->_plec . '",
+            wiek="' . $this->_wiek . '",   
+            status="' . $this->_status . '",
+            opis="' . $this->_opis . '",
+            kastracja="' . $this->_kastracja . '",
+            szczepienia="' . $this->_szczepienia . '",
+            koszta_miesiac="' . $this->_koszta . '" 
+            WHERE id="'. $this->_id .'"';
+        $result = $this->db->query($query) or die($this->db->error);
+        return true;
+    }
     }
 ?>

@@ -1,7 +1,6 @@
 
 <?php
-//include "db.php";
-//include "ImgUpload.php";
+include "db.php";
 
 class Filter
 {
@@ -21,7 +20,7 @@ class Filter
     private $_wiek;
     private $_opis;
     private $_zdjecie;
-    private $_koszta;
+    private $_koszta_miesiac;
 
 
     public function setID($id) {
@@ -82,9 +81,9 @@ class Filter
         $this->_zdjecie = $zdjecie;
     }
 
-    public function setKoszta($koszta)
+    public function setKoszta($koszta_miesiac)
     {
-        $this->_koszta = $koszta;
+        $this->_koszta_miesiac = $koszta_miesiac;
     }
 
 //obiekt do łaczenia z bazą danych
@@ -93,54 +92,21 @@ class Filter
         $this->db = new DBConnection();
         $this->db = $this->db->returnConnection();
     }
-    public function getAnimalsAmmount() {
-        $query = "SELECT * FROM zwierzeta";
-        $result = $this->db->query($query) or die($this->db->error);
-        $animal_data = [];
-        if($rows_counter = $result){
-            $row_cnt = $rows_counter->num_rows;
-        }
-        return $row_cnt;
-    }
     public function getAllAnimals() {
         $query = "SELECT * FROM zwierzeta";
         $result = $this->db->query($query) or die($this->db->error);
-        $animal_data = [];
-        while($content = $result->fetch_array(MYSQLI_ASSOC)){
-            $animal_data[] = $content;
-        }
+        $animal_data = $result->fetch_array(MYSQLI_ASSOC);
         return $animal_data;
     }
+
     public function getAllAdverts()
     {
         $query = "SELECT * FROM zwierzeta WHERE status = 'do adopcji'";
         $result = $this->db->query($query) or die($this->db->error);
-        while($row = $result->fetch_array(MYSQLI_ASSOC))
-        {
-            $rows[] = $row;
-        }
-        return $rows;
+        $animal_data = $result->fetch_array(MYSQLI_ASSOC);
+        return $animal_data;
     }
-    public function getAllInHome()
-    {
-        $query = "SELECT * FROM zwierzeta WHERE status = 'w domu'";
-        $result = $this->db->query($query) or die($this->db->error);
-        while($row = $result->fetch_array(MYSQLI_ASSOC))
-        {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
-    public function getAllInHeaven()
-    {
-        $query = "SELECT * FROM zwierzeta WHERE status = 'died'";
-        $result = $this->db->query($query) or die($this->db->error);
-        while($row = $result->fetch_array(MYSQLI_ASSOC))
-        {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
+
 }
 ?>
 

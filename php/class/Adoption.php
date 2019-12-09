@@ -1,6 +1,6 @@
 <?php
-//include "db.php";
-include "User.php";
+//include "DBConnection.php";
+//include "User.php";
 class Adoption
 {
     protected $db;
@@ -162,6 +162,9 @@ class Adoption
                 status="'.$this->_status.'",
                 zdjecie="'.$this->getPathZdjecia() .'"';
                 $result = $this->db->query($query) or die($this->db->error);
+                $zwierz = new Animal();
+                $zwierz->setId($this->getIdZwierze());
+                $zwierz->updateStatusWhenAnimalAdopted();
 
                 $this->setId($this->db->insert_id);
                 return true;
@@ -173,8 +176,8 @@ class Adoption
         }
     }
 
-    public function getAdoptions(){
-        $query = "SELECT * FROM adopcje" . (strlen($this->_id_uzytkownik) > 0 ? "WHERE id_uzytkownik = " . trim($this->_id_uzytkownik) : "");
+    public function getUserAdoptions(){
+        $query = "SELECT * FROM adopcje WHERE id_uzytkownik = ".$this->getIdUzytkownik();
         $result = $this->db->query($query) or die($this->db->error);
         $count_row = $result->num_rows;
         $ret = [];

@@ -1,4 +1,6 @@
 <?php
+include "php/class/DBConnection.php";
+include "php/class/ImgUpload.php";
 include "php/class/User.php";
 
 $user = new User();
