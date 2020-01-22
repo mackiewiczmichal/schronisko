@@ -11,6 +11,7 @@ class User
     private $_email;
     private $_login;
     private $_haslo;
+    private $_telefon;
     private $_zdjecie;
     private $_path_zdjecia;
     private $_rola;
@@ -42,6 +43,9 @@ class User
     }
     public function setImie($imie) {
         $this->_imie = $imie;
+    }
+    public function setTelefon($telefon) {
+        $this->_telefon = $telefon;
     }
     public function setNazwisko($nazwisko) {
         $this->_nazwisko = $nazwisko;
@@ -91,6 +95,7 @@ class User
             nazwisko="'.$this->_nazwisko.'",
             data_urodzenia="'.$this->_dataurodzenia.'",
             email="'.$this->_email.'",
+            telefon="'.$this->_telefon.'",
             login="'.$this->_login.'",   
             haslo="'.$haslo_hash.'", 
             zdjecie="'.$this->_path_zdjecia.'",
@@ -123,7 +128,7 @@ class User
     
     // get User Information
     public function getUserInfo() {
-        $query = "SELECT id, imie, email, rola FROM uzytkownik WHERE id = ".$this->_id;
+        $query = "SELECT id, imie, email, telefon, rola FROM uzytkownik WHERE id = ".$this->_id;
         $result = $this->db->query($query) or die($this->db->error);
         $user_data = $result->fetch_array(MYSQLI_ASSOC);
         return $user_data;

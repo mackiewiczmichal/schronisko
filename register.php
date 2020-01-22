@@ -20,6 +20,7 @@ if(isset($_POST['submit'])){
     $unazwisko = isset($unazwisko) ? $unazwisko : null;
     $udata = isset($udata) ? $udata : null;
     $uemail = isset($uemail) ? $uemail : null;
+    $utelefon = isset($utelefon) ? $utelefon : null;
     $ulogin = isset($ulogin) ? $ulogin : null;
     $uhaslo = isset($uhaslo) ? $uhaslo : null;
     $uzdjecie = isset($uzdjecie) ? $uzdjecie : null;
@@ -36,6 +37,9 @@ if(isset($_POST['submit'])){
     if(!filter_var($uemail, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "That is not a valid email address!";
     }
+    if(strlen(trim($utelefon)) === 0){
+        $errors[] = "You must enter your phone number";
+    }
     if(strlen(trim($ulogin)) === 0){
         $errors[] = "You must enter your login";
     }
@@ -50,12 +54,13 @@ if(isset($_POST['submit'])){
         $user->setNazwisko($unazwisko);
         $user->setDataurodzenia($udata);
         $user->setEmail($uemail);
+        $user->setTelefon($utelefon);
         $user->setLogin($ulogin);
         $user->setHaslo($uhaslo);
         $user->setZdjecie($uzdjecie);
         $register = $user->userRegistration();
         if ($register) {    
-            $status = "<div class='alert alert-success' style='text-align:center'>Registration successful <a href='".SITE_URL."index.php'>Click here</a> to login</div>";
+            $status = "<div class='alert alert-success' style='text-align:center'>Registration successful <a href='".SITE_URL."login.php'>Click here</a> to login</div>";
         } else {    
             $status = "<div class='alert alert-danger' style='text-align:center'>Registration failed. Email or Username already exits please try again.</div>";
         }
@@ -106,6 +111,10 @@ if(isset($_POST['submit'])){
             <div class="form-group">
                 <label for="imie">Adres email</label>
                 <input type="email" name="uemail" class="form-control" placeholder="Adres email"></input>
+            </div>
+            <div class="form-group">
+                <label for="imie">Numer telefonu</label>
+                <input type="tel" name="utelefon" class="form-control" placeholder="Nr. telefonu" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"></input>
             </div>
             <div class="form-group">
                 <label for="imie">Login w serwisie</label>

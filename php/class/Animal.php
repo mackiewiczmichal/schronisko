@@ -124,7 +124,7 @@ class Animal
             koszta_miesiac="' . $this->_koszta . '" 
             WHERE id="'. $this->_id .'"';
         $result = $this->db->query($query) or die($this->db->error);
-        echo "adam";
+        echo "<div class='alert alert-success' style='text-align:center'>Edit successful <a href='".SITE_URL."edit_animal.php'>Click here</a> to see</div>";
         return true;
     }
     }

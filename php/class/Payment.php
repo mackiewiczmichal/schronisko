@@ -156,7 +156,13 @@ class Payment
         {
             $rows[] = $row;
         }
-        return $rows;
+        if(!empty($rows)){
+            return $rows;
+        }
+        else{
+            return null;
+        }
+
     }
 
 }

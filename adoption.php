@@ -43,7 +43,6 @@ else{
     </div>
     <div class="container-fluid animals pt-5 px-5">
             <div class="row">
-                
                 <?php 
                 if($animal_filtered=="empty"){
                     echo "
@@ -52,7 +51,6 @@ else{
                         <div class='alert alert-danger'>
                             Nie masz zwierząt do adopcji
                         </div>
-
                         </div>
                     </div>
                     
@@ -78,6 +76,10 @@ else{
                                 echo'
                                 <form action="test.php" method="post" name="zid">
                                     <input type="hidden" value="'.$row['id'].'" name="zid" hidden/>
+                                    <div class="form-group">
+                                        <label for="ilosc_miesiecy"><h6>Wybierz przez ile miesięcy chcesz wspierać '.$row['imie'].' </h6></label>
+                                        <input type="number" name="ilosc_miesiecy" class="form-control" value="1" min="1" max="12" required="required"/>
+                                    </div>
                                     <button type="submit" name="submit" class="float-right btn btn-primary">PRZYGARNIJ</button>
                                 </form>';
                             }

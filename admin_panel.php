@@ -56,17 +56,31 @@ $userInfo = $user->getUserInfo();
             <?php
             $pay = new Payment();
             $platnosci = $pay -> getPaymentsHistory();
+
+            if(!empty($platnosci)){
                 foreach ($platnosci as $row){
                     echo "
-                <div class='d-flex flex-column border bd-highlight p-3 mb-3'>
-                    <p><strong>Id adopcji: </strong>". $row['id']."</p>
-                    <p><strong>Id adoptującego: </strong>". $row['id_klienta']."</p>
-                    <p><strong>Data płatności: </strong>". $row['data_platnosci']."</p>
-                    <p><strong>Kwota: </strong>". $row['kwota']."</p>
-                    <p><strong>Oplacone na miesiące: </strong>". $row['ile_miesiecy']."</p>
-                    
-                 </div>";
+                <div class='container'>
+                    <div class='row border p-3 mb-3'>
+                        <div class='col-lg-6 d-flex flex-column bd-highlight'>
+                            <p><strong>Id adopcji: </strong>". $row['id']."</p>
+                            <p><strong>Id adoptującego: </strong>". $row['id_klienta']."</p>
+                            <p><strong>Data płatności: </strong>". $row['data_platnosci']."</p>
+                            <p><strong>Kwota: </strong>". $row['kwota']."</p>
+                            <p><strong>Oplacone na miesiące: </strong>". $row['ile_miesiecy']."</p>
+                        </div>
+                        <div class='col-lg-6'>
+                            <h5><strong>Dane adoptującego: </strong></h5>
+                            <p><strong>Adres email: </strong></p>
+                        </div>
+                    </div>
+                </div>";
                 }
+            }
+            else{
+                echo "Brak danych historii płatności";
+            }
+
             ?>
             </div>
         </div>

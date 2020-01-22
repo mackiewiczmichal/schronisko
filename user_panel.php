@@ -18,7 +18,52 @@ if (isset($_GET['q'])) {
 }
 $user->setID($uid);
 $userInfo = $user->getUserInfo();
+$ad = new Adoption();
+$ad->setIdUzytkownik($user->getId());
+$adopcje = $ad->getUserAdoptions();
 ?>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+    <span class="close">&times;</span>
+<?php
+    if(empty($adopcje)){
+        echo 
+        "
+        <p>Nie masz jeszcze żadnych adopcji!</p>
+        <a class='d-block' href=".SITE_URL."/adoption.php>Do adopcji</a></br>
+    ";
+    }
+    foreach ($adopcje as $row){
+        echo date('Y-m-d');
+        $date1 = date('Y-m-d');
+        $date2 = $row['oplacone_do'];
+        $dateTimestamp1 = strtotime($date1); 
+        $dateTimestamp2 = strtotime($date2); 
+        $data_wygasniecia = ($dateTimestamp2 - $dateTimestamp1) / (60*60*24);
+        $isempty = true;
+        echo $data_wygasniecia;
+        if($data_wygasniecia < "7"){
+            echo "<p><strong>Adopcja: </strong>". $row['id']." status: Twoja adopcja wygaśnie za ".$data_wygasniecia." dni. Opłać teraz by zapewnić zwierzakowi opiekę. <button type='button' class='btn btn-danger'>Opłać teraz</button></p>";
+            $isempty = false;
+        }
+        else if($data_wygasniecia < "0"){
+            
+            echo "<p><strong>Adopcja: </strong>". $row['id']." status: Twoja adopcja wygasła ".$data_wygasniecia." dni temu. Opłać teraz by zapewnić zwierzakowi opiekę. <button type='button' class='btn btn-danger'>Opłać teraz</button></p>";
+        }
+        else{
+            echo "<div class='alert alert-success' role='alert'>
+            Wszystkie adopcje są opłacone! Cieszymy się że wspierasz nasz w opiece nad zwierzakami.
+          </div>";
+        }
+    }
+?>
+</div>
+
+</div>
       <div class="container-fluid hero-container-pages">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -38,9 +83,7 @@ $userInfo = $user->getUserInfo();
         <div class="row">
             <div class="col-lg-12">
                 <?php
-                    $ad = new Adoption();
-                    $ad->setIdUzytkownik($user->getId());
-                    $adopcje = $ad->getUserAdoptions();
+
                     if(empty($adopcje)){
                         echo 
                         "
@@ -49,8 +92,7 @@ $userInfo = $user->getUserInfo();
                         ";
                     }
                     foreach ($adopcje as $row){
-                        echo "<p><strong>Adopcja: </strong>". $row['id']." status: ". $row["status"]."</p>";
-
+                        echo "<p><strong>Adopcja: </strong>". $row['id']." status: ". $row['status']."  Opłacone do: ". $row['oplacone_do']."</p>";
                     }
 
                 ?>
