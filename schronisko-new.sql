@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 06 Gru 2019, 02:04
--- Wersja serwera: 10.4.8-MariaDB
--- Wersja PHP: 7.3.11
+-- Czas generowania: 23 Sty 2020, 22:21
+-- Wersja serwera: 10.4.11-MariaDB
+-- Wersja PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,9 +43,7 @@ CREATE TABLE `adopcje` (
 --
 
 INSERT INTO `adopcje` (`id`, `id_zwierze`, `id_uzytkownik`, `oplacone_do`, `id_ost_platnosci`, `status`, `zdjecie`) VALUES
-(8, 4, 2, '2020-03-05', 7, 'oplacone', '/img/animals_photo/dog4.jpg'),
-(9, 12, 2, '2019-12-05', NULL, 'nieoplacone', '/img/animals_photo/cat3.jpeg'),
-(10, 10, 2, '2020-03-06', 8, 'oplacone', '/img/animals_photo/cat1.jpeg');
+(11, 1, 5, '2020-01-25', 9, 'oplacone', '/img/animals_photo/dog1.jpg');
 
 -- --------------------------------------------------------
 
@@ -67,8 +65,7 @@ CREATE TABLE `historia_platnosci` (
 --
 
 INSERT INTO `historia_platnosci` (`id`, `id_klienta`, `id_adopcji`, `data_platnosci`, `kwota`, `ile_miesiecy`) VALUES
-(7, 2, 8, '2019-12-05', 450, 3),
-(8, 2, 10, '2019-12-06', 240, 3);
+(9, 5, 11, '2020-01-23', 750, 5);
 
 -- --------------------------------------------------------
 
@@ -82,6 +79,7 @@ CREATE TABLE `uzytkownik` (
   `nazwisko` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   `data_urodzenia` date NOT NULL,
   `email` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `telefon` varchar(12) COLLATE utf8_polish_ci NOT NULL,
   `login` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   `haslo` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   `zdjecie` varchar(255) COLLATE utf8_polish_ci NOT NULL,
@@ -92,11 +90,10 @@ CREATE TABLE `uzytkownik` (
 -- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `uzytkownik` (`id`, `imie`, `nazwisko`, `data_urodzenia`, `email`, `login`, `haslo`, `zdjecie`, `rola`) VALUES
-(1, 'admin', 'adminowy', '0000-00-00', 'kontakt@schronisko.pl', 'admin', '21232f297a57a5a743894a0e4a801fc3', '/img/site.png', 'admin'),
-(2, 'sad', 'sad222', '2222-02-22', 'aemafqweqweqweqewul@gmail.com', 'asd11', '$2y$10$OvXvbUsKJD2OJwf2S0t0ZOxCzB/S.0GJUfyrVy/jK5xKWsVKYGgQu', '/C:xampphtdocsasd11.jpeg', 'user'),
-(3, 'asdasd', 'asdasd', '2222-02-22', 'aemsadfasfdaful@gmail.com', 'asd22', '$2y$10$IesWr/JZaJoTUk0Bhs00peGSMyYxtvXuB6th645b8ylfCh9DD9etS', '/C:xampphtdocsasd22.jpeg', 'user'),
-(4, 'Krzysztof', 'Kania', '0022-02-22', 'aeaaaaaaaamaful@gmail.com', 'asd333', '$2y$10$wepkCAbiO1ObJBLBs5M15.xG1iXg50Pk4BhIRZsihQhrER8DnXWcq', '/img/users/asd333.jpeg', 'user');
+INSERT INTO `uzytkownik` (`id`, `imie`, `nazwisko`, `data_urodzenia`, `email`, `telefon`, `login`, `haslo`, `zdjecie`, `rola`) VALUES
+(5, 'Michał', 'Mackiewicz', '2020-01-26', 'michal.mackiewicz0@gmail.com', '555-666-666', 'macek', '$2y$10$K/aOhPkCP.R5EqBwKAoAreOltjmdBXltIwsoafa9CiTrj5ngAj7pa', '/img/users/macek.png', 'user'),
+(6, 'Michał', 'Mackiewicz', '2020-01-18', 'michal.mackiewicz0@gmail.com', '666-666-666', 'macekadmin', '$2y$10$i1s/aeanEgVBDhqTOZoul.4SozloukNvoKIC8kxnGQWG6CO/OMuKa', '/img/users/macekadmin.png', 'admin'),
+(7, 'Michał', 'Mackiewicz', '2020-01-31', 'michal.mackiewicz0@gmail.com', '666666666', 'macek11', '$2y$10$3qOHX3cAdtB3zw.8NKnD3.bMMrQJGXTrTsuWsm.VgsBgU/yfzcsYG', '/img/users/macek11.png', 'user');
 
 -- --------------------------------------------------------
 
@@ -124,7 +121,7 @@ CREATE TABLE `zwierzeta` (
 --
 
 INSERT INTO `zwierzeta` (`id`, `imie`, `gatunek`, `rasa`, `plec`, `wiek`, `status`, `opis`, `zdjecie`, `kastracja`, `szczepienia`, `koszta_miesiac`) VALUES
-(1, 'Zgredek', 'Pies', 'Kundel', 'pies', '11 lat', 'do adopcji', 'Zgredek… Czy jest stary? Tak. Czy nie potrafi już zachować czystości? Tak. Czy jest głuchy i niedowidzący? Tak. CZY POTRZEBUJE BYĆ KOCHANY? TAK!!!\r\n\r\nZgredzio to już starszy pies, który ma problem z wzrokiem i słuchem. Zachowanie czystości tez zostawia wiele do życzenia, jednak chce być tak samo kochany jak inne psy! Śmierć w schronisku to najgorsze co może spotkać zwierzęta… Zima nadchodzi wielkimi krokami, dla młodych zwierząt nie ma to większego znaczenia ale dla starszych MA OGROMNE! Czy przeżyje zimę w schronisku? Nikt nie może być tego pewien.\r\n\r\nAdoptuj starszego psa! One kochają tak samo mocno i będą wam za to wdzięczne nawet jeśli nie będą w stanie wam tego pokazać.', '/img/animals_photo/dog1.jpg', 'tak', 'tak', 150),
+(1, 'Zgredek', 'Pies', 'Kundel', 'pies', '11 lat', 'w domu', 'Zgredek… Czy jest stary? Tak. Czy nie potrafi już zachować czystości? Tak. Czy jest głuchy i niedowidzący? Tak. CZY POTRZEBUJE BYĆ KOCHANY? TAK!!!\r\n\r\nZgredzio to już starszy pies, który ma problem z wzrokiem i słuchem. Zachowanie czystości tez zostawia wiele do życzenia, jednak chce być tak samo kochany jak inne psy! Śmierć w schronisku to najgorsze co może spotkać zwierzęta… Zima nadchodzi wielkimi krokami, dla młodych zwierząt nie ma to większego znaczenia ale dla starszych MA OGROMNE! Czy przeżyje zimę w schronisku? Nikt nie może być tego pewien.\r\n\r\nAdoptuj starszego psa! One kochają tak samo mocno i będą wam za to wdzięczne nawet jeśli nie będą w stanie wam tego pokazać.', '/img/animals_photo/dog1.jpg', 'tak', 'tak', 150),
 (2, 'Gloria', 'Pies', 'Kundel', 'suka', '5 lat', 'do adopcji', 'Historia Glorii nie należy do tych niezwykłych, do zamieszczonego postu nie dodajemy zdjęć psa który swoją historią może się wybić na skale internetu… Tak naprawdę jej zdjęcia mogą nie poruszyć nikogo, bo przecież kto popatrzy zza kraty na zwykłego, przeciętnego kundelka? Nie mam jak opisać jej historii, żeby w waszych oczach pojawiły się łzy.. Bo łzy ciekły wam po policzkach, wystarczy popatrzeć temu psu głęboko w oczy, próbując przeprosić za ludzką rasę… Gloria- całe życie niepotrzebna, przeganiana, nikomu nie potrzebna… Dzisiaj czeka na iskierkę nadziei w schronisku.', '/img/animals_photo/dog2.jpg', 'tak', 'tak', 100),
 (3, 'Aro', 'Pies', 'Kundel', 'pies', '7 lat', 'do adopcji', 'Aro przeżył w swoim dotychczasowym życiu bardzo dużo, spędził 8 lat u boku swojej kochającej rodziny niestety sytuacja życiowa nie pozwoliła na dalszą opiekę nad nim Aro wyruszył do nowego domu, wydawałoby się że już do końca życia, niestety został brutalnie wyrzucony i podrzucony pod schronisko… Dzisiaj czeka na nowy dom <3 Aro jest bardzo wesołym, inteligentnym psiakiem, nie ma problemu z innymi zwierzętami, psami ani dziećmi', '/img/animals_photo/dog3.jpg', 'tak', 'tak', 200),
 (4, 'Gabi', 'Pies', 'Jamnik', 'suka', '6 lat', 'w domu', 'Gabi siedziała i patrzyła na swoją śmierć… Ona czekała, patrzyła i prosiła żeby ktoś po nią wrócił, siedząc na poboczu drogi zawiodła się na ludziach… Zostawili ją samą, bezsilną, skrajnie wychudzoną i przerażoną! Powiedzcie nam kim byli ci ludzie bez empati? Została po latach wierności wyrzucona jak śmieć! Czy to się nazywa ludzka godność? Patrząc w jej oczy z całego serca próbujemy ją po prostu przeprosić… Gabi jest kochaną, prawdziwą pieszczotką która zza kratami boksu po prostu płacze, prawdopodobnie była wykorzystywana w celach myśliwskich, dlatego też szuka domu bez małych zwierząt.', '/img/animals_photo/dog4.jpg', 'nie', 'tak', 150),
@@ -190,26 +187,26 @@ ALTER TABLE `zwierzeta`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla tabel zrzutów
 --
 
 --
 -- AUTO_INCREMENT dla tabeli `adopcje`
 --
 ALTER TABLE `adopcje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `historia_platnosci`
 --
 ALTER TABLE `historia_platnosci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `zwierzeta`
