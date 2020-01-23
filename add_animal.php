@@ -84,7 +84,7 @@ if(isset($_POST['submit'])){
         $animal->setKoszta($ukoszta);
         $addAnimal = $animal->addAnimal();
         if ($addAnimal) {
-            $status = "<div class='alert alert-success' style='text-align:center'>Zwierzak dodany pomyślnie <a href='".SITE_URL."home.php'>Kliknij tutaj</a> żeby zobaczyć</div>";
+            $status = "<div class='alert alert-success' style='text-align:center'>Zwierzak dodany pomyślnie <a href='".SITE_URL."index.php'>Kliknij tutaj</a> żeby zobaczyć</div>";
         } else {
             $status = "<div class='alert alert-danger' style='text-align:center'>Dodawanie nieudane. Spróbuj ponownie.</div>";
         }
