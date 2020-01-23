@@ -114,7 +114,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="form-group">
                 <label for="imie">Numer telefonu</label>
-                <input type="tel" name="utelefon" class="form-control" placeholder="Nr. telefonu" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"></input>
+                <input type="tel" name="utelefon" class="form-control" placeholder="Nr. telefonu" pattern="[0-9]{3}[0-9]{3}[0-9]{3}"></input>
             </div>
             <div class="form-group">
                 <label for="imie">Login w serwisie</label>

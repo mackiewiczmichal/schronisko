@@ -164,5 +164,21 @@ class Payment
         }
 
     }
+    public function getUserTelefon($id)
+    {
+        $query = "SELECT telefon FROM uzytkownik WHERE id = ".$id;
+        $result = $this->db->query($query) or die($this->db->error);
+        while($row = $result->fetch_array(MYSQLI_ASSOC))
+        {
+            $rows[] = $row;
+        }
+        if(!empty($rows)){
+            return $rows;
+        }
+        else{
+            return null;
+        }
+
+    }
 
 }

@@ -133,6 +133,7 @@ class User
         $user_data = $result->fetch_array(MYSQLI_ASSOC);
         return $user_data;
     }
+
     
     //get Session 
     public function getSession() {

@@ -69,10 +69,6 @@ $userInfo = $user->getUserInfo();
                             <p><strong>Kwota: </strong>". $row['kwota']."</p>
                             <p><strong>Oplacone na miesiące: </strong>". $row['ile_miesiecy']."</p>
                         </div>
-                        <div class='col-lg-6'>
-                            <h5><strong>Dane adoptującego: </strong></h5>
-                            <p><strong>Adres email: </strong></p>
-                        </div>
                     </div>
                 </div>";
                 }
